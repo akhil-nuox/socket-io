@@ -1,0 +1,27 @@
+// server.js
+const http = require('http');
+const socketIo = require('socket.io');
+
+const port = 3000;
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.end("<h1>Server up and running on http://localhost:" + port + " </h1>");
+});
+
+const io = socketIo(server);
+io.on('connection', (socket) => {
+  console.log('A user connected');
+
+  socket.on('send-message', (msg) => {
+    console.log('Received message:', msg);
+    io.emit('chat-message', msg); // Broadcast the message to all connected clients
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
+  });
+});
+
+server.listen(port, () => {
+  console.log('Server is running on http://localhost:' + port);
+});
