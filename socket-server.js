@@ -15,6 +15,8 @@ app.get('/', (req, res) => {
 app.get("/chat",(req,res)=>{
   res.sendFile(__dirname + "/app.js");
 });
+
+
 io.on('connection', (socket) => {
   console.log('A user connected');
 
