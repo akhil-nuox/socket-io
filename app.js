@@ -16,7 +16,7 @@ const promptUser = async (question) => {
   });
 };
 
-const socket = io("http://localhost:3000");
+const socket = io("http://137.184.95.99:3000");
 
 socket.on("connect", async () => {
   console.log(chalk.bgWhite("\n Connected to server... \n\n"));
